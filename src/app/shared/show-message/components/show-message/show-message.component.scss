@@ -1,0 +1,57 @@
+.wrapper {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal-block {
+  width: 540px;
+  height: 370px;
+  overflow-y: auto;
+  background: linear-gradient(180.06deg, #ffffff -17.08%, #e2e2e2 136.01%);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: calc(50% - 195px);
+  left: calc(50% - 270px);
+  text-align: center;
+
+  .confirm-modal {
+    .close-wrapper {
+      cursor: pointer;
+      display: flex;
+      justify-content: flex-end;
+
+      .close {
+        margin: 10px;
+      }
+    }
+
+    .logo-wrapper {
+      margin: 20px 0;
+      img{
+        width: 100px;
+        height: 100px;
+      }
+    }
+    .text-wrapper {
+      margin-top: 30px;
+      ul {
+        width: 70%;
+        margin: auto;
+        text-align: center;
+        list-style-type: none;
+        li {
+          font: normal 600 18px WeblySleek UI, sans-serif;
+          color: #757575;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+

@@ -6,6 +6,7 @@ import {LayoutModule} from './shared/modules/layout/layout.module';
 import {LoadingModule} from './shared/modules/loading/loading.module';
 import {AppRoutingModule} from './app-routing.module';
 import {interceptors} from './shared/interceptors/interceptors';
+import {ShowMessageModule} from './shared/show-message/show-message.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {interceptors} from './shared/interceptors/interceptors';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    LoadingModule
+    LoadingModule,
+    ShowMessageModule
   ],
   providers: [...interceptors],
   bootstrap: [AppComponent]
