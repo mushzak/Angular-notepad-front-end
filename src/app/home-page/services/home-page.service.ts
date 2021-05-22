@@ -10,7 +10,4 @@ export class HomePageService {
     private http: HttpClient
   ) { }
 
-  test(){
-    return this.http.get(`https://jsonplaceholder.typicode.com/posts/erigehuitg`);
-  }
 }

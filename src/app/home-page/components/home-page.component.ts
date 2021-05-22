@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import {HomePageService} from '../../services/home-page.service';
+import {HomePageService} from '../services/home-page.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +13,6 @@ export class HomePageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.homePageService.test().subscribe();
   }
 
 }
