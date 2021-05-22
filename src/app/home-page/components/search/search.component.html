@@ -1,7 +1,7 @@
 <div class="search">
-  <form>
+  <form [formGroup]="searchForm">
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Search Notes">
+      <input type="text" class="form-control search" placeholder="Search Notes" formControlName="query">
     </div>
   </form>
 </div>

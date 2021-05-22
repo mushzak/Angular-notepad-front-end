@@ -1,0 +1,22 @@
+.note-item{
+  margin-bottom: 20px;
+  .head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .actions{
+    display: flex;
+    div{
+      padding-right: 10px;
+      cursor: pointer;
+      img{
+        height: 16px;
+        &:hover{
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

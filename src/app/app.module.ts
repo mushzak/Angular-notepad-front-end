@@ -9,6 +9,7 @@ import {LoadingModule} from './shared/modules/loading/loading.module';
 import {AppRoutingModule} from './app-routing.module';
 import {interceptors} from './shared/interceptors/interceptors';
 import {ShowMessageModule} from './shared/show-message/show-message.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {ShowMessageModule} from './shared/show-message/show-message.module';
     LayoutModule,
     LoadingModule,
     ShowMessageModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [...interceptors],
   bootstrap: [AppComponent]

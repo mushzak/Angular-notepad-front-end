@@ -1,0 +1,29 @@
+<div class="note-item list-item">
+  <div class="head">
+    <div class="title">
+      <h4>Note 1</h4>
+    </div>
+    <div class="actions">
+      <swal
+        #deleteAlert
+        title="Delete Note 1?"
+        text="This cannot be undone"
+        icon="warning"
+        [showCancelButton]="true"
+        [focusCancel]="true"
+        (confirm)="delete()">
+      </swal>
+      <div>
+        <img src="assets/icons/edit.svg" alt="edit">
+      </div>
+      <div>
+        <img src="assets/icons/delete.svg" alt="delete" [swal]="deleteAlert">
+      </div>
+    </div>
+  </div>
+  <div class="description">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto est et nulla! Ab amet asperiores aspernatur,
+      cum delectus distinctio eius eos est incidunt ipsa ipsam iste nesciunt officiis quas sint?</p>
+  </div>
+</div>
+
