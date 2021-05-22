@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {LayoutModule} from './shared/modules/layout/layout.module';
 import {LoadingModule} from './shared/modules/loading/loading.module';
 import {AppRoutingModule} from './app-routing.module';
+import {interceptors} from './shared/interceptors/interceptors';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import {AppRoutingModule} from './app-routing.module';
     LayoutModule,
     LoadingModule
   ],
-  providers: [],
+  providers: [...interceptors],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
