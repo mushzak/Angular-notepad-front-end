@@ -1,0 +1,11 @@
+.home-page-body{
+  .body-item-group{
+    section{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 15px;
+      grid-row-gap: 0;
+    }
+  }
+}

@@ -3,15 +3,12 @@
   form{
     .form-group{
       .form-control{
-        padding: 12px;
-        border: 1px solid #d9d9d9;
-        border-radius: 30px;
         width: 250px;
-        outline: none;
         background-image: url('../../../../assets/icons/search-icon.svg');
         background-repeat: no-repeat;
         background-position: right 10px center;
         background-size: 16px;
+        padding: 12px;
       }
     }
   }
