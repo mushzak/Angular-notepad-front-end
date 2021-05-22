@@ -11,8 +11,8 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, finalize, tap} from 'rxjs/operators';
 
 import {ModalService} from '../services/modal.service';
-import {ShowMessageComponent} from '../show-message/components/show-message/show-message.component';
 import {LoadingService} from '../modules/loading/services/loading.service';
+import {ShowMessageComponent} from '../modules/show-message/components/show-message/show-message.component';
 
 
 @Injectable()

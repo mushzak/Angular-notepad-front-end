@@ -8,6 +8,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { NoteListComponent } from './components/note-list/note-list.component';
 import { NoteItemComponent } from './components/note-list/note-item/note-item.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {NoteFormModule} from '../shared/modules/note-form/note-form.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     CommonModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    NoteFormModule
   ]
 })
 export class HomePageModule {

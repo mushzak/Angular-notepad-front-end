@@ -7,12 +7,14 @@ import {HomePageService} from '../services/home-page.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit{
+  notes;
   constructor(
     private homePageService: HomePageService
   ) {
   }
 
   ngOnInit(): void {
+    this.notes = this.homePageService.notes;
   }
 
 }

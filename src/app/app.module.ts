@@ -8,8 +8,8 @@ import {LayoutModule} from './shared/modules/layout/layout.module';
 import {LoadingModule} from './shared/modules/loading/loading.module';
 import {AppRoutingModule} from './app-routing.module';
 import {interceptors} from './shared/interceptors/interceptors';
-import {ShowMessageModule} from './shared/show-message/show-message.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {ShowMessageModule} from './shared/modules/show-message/show-message.module';
 
 
 @NgModule({

@@ -1,29 +1,35 @@
-<div class="note-item list-item">
+<div class="note-item list-item" *ngIf="!isEditing; else onEdit">
   <div class="head">
     <div class="title">
-      <h4>Note 1</h4>
+      <h4>{{note.title}}</h4>
     </div>
     <div class="actions">
       <swal
         #deleteAlert
-        title="Delete Note 1?"
+        title="Delete {{note.title}}"
         text="This cannot be undone"
         icon="warning"
         [showCancelButton]="true"
         [focusCancel]="true"
-        (confirm)="delete()">
+        (confirm)="delete(note.id)">
       </swal>
-      <div>
+      <div (click)="isEditing = !isEditing">
         <img src="assets/icons/edit.svg" alt="edit">
       </div>
-      <div>
-        <img src="assets/icons/delete.svg" alt="delete" [swal]="deleteAlert">
+      <div [swal]="deleteAlert">
+        <img src="assets/icons/delete.svg" alt="delete">
       </div>
     </div>
   </div>
   <div class="description">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto est et nulla! Ab amet asperiores aspernatur,
-      cum delectus distinctio eius eos est incidunt ipsa ipsam iste nesciunt officiis quas sint?</p>
+    <p>{{note.description}}</p>
   </div>
 </div>
+<ng-template #onEdit>
+  <div class="note-item list-item">
+    <app-note-form (editIsDone)="isEditing = !isEditing" [type]="'edit'" [editableData]="note"></app-note-form>
+  </div>
+</ng-template>
+
+
 

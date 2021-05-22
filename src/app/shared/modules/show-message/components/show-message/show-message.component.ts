@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {ModalService} from '../../../services/modal.service';
+import {ModalService} from '../../../../services/modal.service';
 
 @Component({
   selector: 'app-show-message',

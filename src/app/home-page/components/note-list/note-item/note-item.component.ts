@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-note-item',
@@ -6,13 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./note-item.component.scss']
 })
 export class NoteItemComponent implements OnInit {
+  isEditing = false;
+  @Input() note;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  delete() {
-    console.log('delete');
+  delete(id: number): void {
+    console.log('delete: ' + id);
   }
 }

@@ -1,0 +1,28 @@
+form{
+  .form-group{
+    margin-bottom: 20px;
+    input{
+      width: 70%;
+      padding: 9px 13px;
+    }
+    textarea{
+      border-radius: 13px;
+    }
+  }
+  button{
+    background-color: #007bff;
+    padding: 8px 45px;
+    color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 16px;
+    cursor: pointer;
+    &:hover{
+      opacity: 0.8;
+    }
+    &.btn-cancel{
+      background-color: #dc3545;
+      border-color: #dc3545;
+      margin-left: 5px;
+    }
+  }
+}
