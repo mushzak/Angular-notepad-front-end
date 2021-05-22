@@ -40,7 +40,7 @@ export class CreationChartComponent implements OnInit, AfterViewInit {
       ]
     }
   ];
-  view: any[] = [700, 400];
+  // view: any[] = [600, 300];
 
   // options
   showXAxis = true;
@@ -51,7 +51,7 @@ export class CreationChartComponent implements OnInit, AfterViewInit {
   xAxisLabel = '';
   showYAxisLabel = true;
   yAxisLabel = 'Number of notes';
-  timeline = false;
+  timeline = true;
 
   colorScheme = {
     domain: ['#84acda']
