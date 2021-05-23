@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {HomePageService} from '../../../services/home-page.service';
 
 @Component({
   selector: 'app-note-item',
@@ -9,13 +10,15 @@ export class NoteItemComponent implements OnInit {
   isEditing = false;
   @Input() note;
 
-  constructor() {
+  constructor(
+    private homePgeService: HomePageService
+  ) {
   }
 
   ngOnInit(): void {
   }
 
   delete(id: number): void {
-    console.log('delete: ' + id);
+    this.homePgeService.delete$.next(id);
   }
 }

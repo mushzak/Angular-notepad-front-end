@@ -25,16 +25,31 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   initializeListeners(): void {
     this.getNotes();
-    this.homePageService.submitted$.pipe(
-      switchMap(data => {
-        if (data.type === 'create') {
-          return this.homePageService.createNote(data.body);
-        }
+    this.subscription.add(
+      this.homePageService.submitted$.pipe(
+        switchMap(data => {
+          if (data.type === 'create') {
+            return this.homePageService.createNote(data.body);
+          } else if (data.type === 'edit') {
+            return this.homePageService.updateNote(data.body, data.id);
+          }
+        })
+      ).subscribe(res => {
+        this.getNotes();
+        this.homePageService.created$.next(res);
       })
-    ).subscribe(res => {
-      this.getNotes();
-      this.homePageService.created$.next(res);
-    });
+    );
+    this.subscription.add(
+      this.homePageService.delete$.pipe(
+        switchMap(id => {
+          if (id) {
+            return this.homePageService.deleteNote(id);
+          }
+        })
+      ).subscribe(id => {
+        this.notes = this.notes.filter(note => note.id !== id);
+      })
+    );
   }
 
   searchText($event: string): void {

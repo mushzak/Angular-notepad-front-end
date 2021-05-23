@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HomePageService} from '../../../../../home-page/services/home-page.service';
 import {Subscription} from 'rxjs';
+import {Note} from '../../../../../home-page/model/note.model';
 
 @Component({
   selector: 'app-note-form',
@@ -9,10 +10,10 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./note-form.component.scss']
 })
 export class NoteFormComponent implements OnInit, OnDestroy {
-  createForm: FormGroup;
+  noteForm: FormGroup;
   subscription: Subscription = new Subscription();
   @Input() type: string;
-  @Input() editableData: string;
+  @Input() editableData: Note;
   @Output() editIsDone = new EventEmitter<void>();
   @Output() create = new EventEmitter<[]>();
 
@@ -31,44 +32,42 @@ export class NoteFormComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.homePageService.created$.subscribe(created => {
         if (created) {
-          this.createForm.reset();
+          this.noteForm.reset();
         }
       })
     );
   }
 
   /**
-   * Initializes createForm property with the corresponding fields (title,description)
+   * Initializes noteForm property with the corresponding fields (title,description)
    */
   initializeForm(): void {
-    this.createForm = this.fb.group({
-      // @ts-ignore
+    this.noteForm = this.fb.group({
       title: [this.editableData?.title ?? '', [Validators.required, Validators.maxLength(255)]],
-      // @ts-ignore
       description: [this.editableData?.description ?? '', Validators.required],
     });
   }
 
   get title(): AbstractControl {
-    return this.createForm.get('title');
+    return this.noteForm.get('title');
   }
 
   get description(): AbstractControl {
-    return this.createForm.get('description');
+    return this.noteForm.get('description');
   }
 
-  submitCreateForm(): void {
-    if (this.createForm.invalid) {
-      this.createForm.markAllAsTouched();
-    } else {
-      if (this.type === 'create') {
-        this.homePageService.submitted$.next({type: 'create', body: this.createForm.value});
-      } else {
-        this.editIsDone.emit();
-        console.log('EDIT: ' + this.createForm.value);
-
-      }
+  submitNoteForm(): void {
+    if (this.noteForm.invalid) {
+      this.noteForm.markAllAsTouched();
+      return;
     }
+    if (this.type === 'create') {
+      this.homePageService.submitted$.next({type: 'create', body: this.noteForm.value, id: null});
+    } else {
+      this.editIsDone.emit();
+      this.homePageService.submitted$.next({type: 'edit', body: this.noteForm.value, id: this.editableData.id});
+    }
+
   }
 
   cancel(): void {
