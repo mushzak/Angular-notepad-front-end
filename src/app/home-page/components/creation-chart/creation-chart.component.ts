@@ -75,5 +75,4 @@ export class CreationChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.customLinerChartService.showDots(this.chart);
   }
-
 }

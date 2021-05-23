@@ -3,6 +3,7 @@ import {HomePageService} from '../services/home-page.service';
 import {Note} from '../model/note.model';
 import {Subscription} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
+import {ChartData} from '../model/chart-data.model';
 
 @Component({
   selector: 'app-home-page',
@@ -11,6 +12,10 @@ import {switchMap} from 'rxjs/operators';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   notes: Note[];
+  chartData: ChartData = {
+    name: 'notes',
+    series: []
+  };
   subscription: Subscription = new Subscription();
   reqData = {
     offset: 0,
@@ -65,7 +70,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.getNotes();
   }
 
-  // { query: string, offset: number, limit: number }
   private getNotes(isScrolled = null): void {
     this.subscription.add(
       this.homePageService.getNotes(this.reqData).subscribe(notes => {
