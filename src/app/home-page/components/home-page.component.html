@@ -1,4 +1,10 @@
-<div class="home-page-body">
+<div class="home-page-body"
+     infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="300"
+     (scrolled)="onScroll()"
+     [scrollWindow]="true"
+>
   <div class="body-item-group">
     <app-search (typing)="searchText($event)"></app-search>
       <section>

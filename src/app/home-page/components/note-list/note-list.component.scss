@@ -1,11 +1,12 @@
-.note-items{
+.note-items {
   @media only screen and (max-width: 1200px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 15px;
     grid-row-gap: 15px;
-  }  @media only screen and (max-width: 480px) {
+  }
+  @media only screen and (max-width: 480px) {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
   }

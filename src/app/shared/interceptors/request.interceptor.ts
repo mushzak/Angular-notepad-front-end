@@ -11,7 +11,6 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, finalize, tap} from 'rxjs/operators';
 
 import {ModalService} from '../services/modal.service';
-import {LoadingService} from '../modules/loading/services/loading.service';
 import {ShowMessageComponent} from '../modules/show-message/components/show-message/show-message.component';
 
 
@@ -20,13 +19,11 @@ export class RequestInterceptor implements HttpInterceptor {
   activeRequests = 0;
 
   constructor(
-    private message: ModalService,
-    private loadingService: LoadingService,
+    private message: ModalService
   ) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loadingService.show();
     this.activeRequests++;
 
     return next.handle(request)
@@ -59,9 +56,6 @@ export class RequestInterceptor implements HttpInterceptor {
         }),
         finalize(() => {
           this.activeRequests--;
-          if (this.activeRequests === 0) {
-            this.loadingService.hide();
-          }
         })
       );
   }

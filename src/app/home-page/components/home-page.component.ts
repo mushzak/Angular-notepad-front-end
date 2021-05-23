@@ -57,7 +57,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   searchText($event: string): void {
-    this.reqData  = {
+    this.reqData = {
       offset: 0,
       limit: 10,
       query: $event
@@ -66,15 +66,24 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   // { query: string, offset: number, limit: number }
-  private getNotes(): void {
+  private getNotes(isScrolled = null): void {
     this.subscription.add(
       this.homePageService.getNotes(this.reqData).subscribe(notes => {
-        this.notes = notes;
+        if (isScrolled) {
+          this.notes.push(...notes);
+        } else {
+          this.notes = notes;
+        }
       })
     );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  onScroll(): void {
+    this.reqData.offset += 10;
+    this.getNotes(true);
   }
 }
