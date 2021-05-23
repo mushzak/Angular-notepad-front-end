@@ -1,24 +1,40 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HomePageService} from '../../../../../home-page/services/home-page.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-note-form',
   templateUrl: './note-form.component.html',
   styleUrls: ['./note-form.component.scss']
 })
-export class NoteFormComponent implements OnInit {
+export class NoteFormComponent implements OnInit, OnDestroy {
   createForm: FormGroup;
+  subscription: Subscription = new Subscription();
   @Input() type: string;
   @Input() editableData: string;
   @Output() editIsDone = new EventEmitter<void>();
+  @Output() create = new EventEmitter<[]>();
 
   constructor(
     private fb: FormBuilder,
+    private homePageService: HomePageService,
   ) {
   }
 
   ngOnInit(): void {
     this.initializeForm();
+    this.initializeListeners();
+  }
+
+  initializeListeners(): void {
+    this.subscription.add(
+      this.homePageService.created$.subscribe(created => {
+        if (created) {
+          this.createForm.reset();
+        }
+      })
+    );
   }
 
   /**
@@ -46,7 +62,7 @@ export class NoteFormComponent implements OnInit {
       this.createForm.markAllAsTouched();
     } else {
       if (this.type === 'create') {
-        console.log('CREATE: ' + this.createForm.value);
+        this.homePageService.submitted$.next({type: 'create', body: this.createForm.value});
       } else {
         this.editIsDone.emit();
         console.log('EDIT: ' + this.createForm.value);
@@ -57,5 +73,9 @@ export class NoteFormComponent implements OnInit {
 
   cancel(): void {
     this.editIsDone.emit();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -35,7 +35,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   initializeListeners(): void {
     this.subscription.add(
       this.searchForm.get('query').valueChanges.pipe(
-        debounceTime(200),
+        // debounceTime(200),
       ).subscribe(value => {
         this.typing.emit(value);
       })
