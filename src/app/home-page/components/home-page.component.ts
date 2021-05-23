@@ -8,6 +8,7 @@ import {HomePageService} from '../services/home-page.service';
 })
 export class HomePageComponent implements OnInit{
   notes;
+  query: string;
   constructor(
     private homePageService: HomePageService
   ) {
@@ -17,4 +18,7 @@ export class HomePageComponent implements OnInit{
     this.notes = this.homePageService.notes;
   }
 
+  searchText($event: string): void {
+    this.query = $event;
+  }
 }

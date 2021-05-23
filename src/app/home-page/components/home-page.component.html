@@ -1,9 +1,9 @@
 <div class="home-page-body">
   <div class="body-item-group">
-    <app-search></app-search>
-    <section>
+    <app-search (typing)="searchText($event)"></app-search>
+      <section>
       <app-create-note></app-create-note>
-      <app-note-list [notes]="notes"></app-note-list>
+      <app-note-list [query]="query" [notes]="notes"></app-note-list>
       <app-creation-chart></app-creation-chart>
     </section>
   </div>

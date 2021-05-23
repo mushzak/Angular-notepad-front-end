@@ -11,6 +11,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {NoteFormModule} from '../shared/modules/note-form/note-form.module';
 import { CreationChartComponent } from './components/creation-chart/creation-chart.component';
 import {BarChartModule, LineChartModule} from '@swimlane/ngx-charts';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {BarChartModule, LineChartModule} from '@swimlane/ngx-charts';
     NoteListComponent,
     NoteItemComponent,
     CreationChartComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,

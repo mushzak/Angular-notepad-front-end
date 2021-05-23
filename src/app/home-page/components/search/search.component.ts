@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
@@ -11,6 +11,7 @@ import {debounceTime} from 'rxjs/operators';
 export class SearchComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   subscription: Subscription = new Subscription();
+  @Output() typing: EventEmitter<string> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -21,6 +22,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.initializeForm();
     this.initializeListeners();
   }
+
   /**
    * Initializes search form property with the corresponding fields (title,description)
    */
@@ -30,12 +32,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  initializeListeners(): void{
+  initializeListeners(): void {
     this.subscription.add(
       this.searchForm.get('query').valueChanges.pipe(
         debounceTime(200),
       ).subscribe(value => {
-        console.log(value);
+        this.typing.emit(value);
       })
     );
   }

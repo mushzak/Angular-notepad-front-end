@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NoteListComponent implements OnInit {
   @Input() notes;
+  @Input() query: string;
 
   constructor() {
   }
