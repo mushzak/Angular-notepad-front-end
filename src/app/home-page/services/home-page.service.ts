@@ -21,8 +21,10 @@ export class HomePageService {
   /**
    * Get notes
    */
-  getNotes(): Observable<Note[]> {
-    return this.http.get<Note[]>(`${environment.apiUrl}/notes`);
+  getNotes(reqParams): Observable<Note[]> {
+    return this.http.get<Note[]>(`${environment.apiUrl}/notes`, {
+      params: reqParams
+    });
   }
 
   /**

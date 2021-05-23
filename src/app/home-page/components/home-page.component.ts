@@ -11,8 +11,12 @@ import {switchMap} from 'rxjs/operators';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   notes: Note[];
-  query: string;
   subscription: Subscription = new Subscription();
+  reqData = {
+    offset: 0,
+    limit: 10,
+    query: '',
+  };
 
   constructor(
     private homePageService: HomePageService
@@ -53,12 +57,18 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   searchText($event: string): void {
-    this.query = $event;
+    this.reqData  = {
+      offset: 0,
+      limit: 10,
+      query: $event
+    };
+    this.getNotes();
   }
 
+  // { query: string, offset: number, limit: number }
   private getNotes(): void {
     this.subscription.add(
-      this.homePageService.getNotes().subscribe(notes => {
+      this.homePageService.getNotes(this.reqData).subscribe(notes => {
         this.notes = notes;
       })
     );
