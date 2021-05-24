@@ -13,10 +13,6 @@ import * as moment from 'moment';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   notes: Note[];
-  chartData: ChartData[] = [{
-    name: 'notes',
-    series: []
-  }];
   subscription: Subscription = new Subscription();
   reqData = {
     offset: 0,
@@ -45,6 +41,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
           }
         })
       ).subscribe(res => {
+        this.reqData = {
+          offset: 0,
+          limit: 10,
+          query: '',
+        };
         this.getNotes();
         this.homePageService.created$.next(res);
       })
