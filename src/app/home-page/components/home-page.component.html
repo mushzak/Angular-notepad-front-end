@@ -6,7 +6,7 @@
      [scrollWindow]="true"
 >
   <div class="body-item-group">
-    <app-search (typing)="searchText($event)"></app-search>
+    <app-search (chartFilter)="getChartFilterData($event)" (typing)="searchText($event)"></app-search>
       <section>
       <app-create-note></app-create-note>
       <app-note-list [notes]="notes"></app-note-list>

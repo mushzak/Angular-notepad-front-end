@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   chartFilterForm: FormGroup;
   subscription: Subscription = new Subscription();
   @Output() typing: EventEmitter<string> = new EventEmitter();
+  @Output() chartFilter: EventEmitter<string> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -37,8 +38,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       from: [formatDate(moment().add(-30, 'days').format(), 'yyyy-MM-dd', 'en')],
       to: [formatDate(moment.now(), 'yyyy-MM-dd', 'en')],
     });
-    // this.chartFilterForm.get('from').setValue(formatDate(moment().add(-30, 'days').format(), 'yyyy-MM-dd', 'en'));
-    // this.chartFilterForm.get('to').setValue(formatDate(moment.now(), 'yyyy-MM-dd', 'en'));
   }
 
   initializeListeners(): void {
@@ -47,6 +46,11 @@ export class SearchComponent implements OnInit, OnDestroy {
         debounceTime(200),
       ).subscribe(value => {
         this.typing.emit(value);
+      })
+    );
+    this.subscription.add(
+      this.chartFilterForm.valueChanges.subscribe(value => {
+        this.chartFilter.emit(value);
       })
     );
   }

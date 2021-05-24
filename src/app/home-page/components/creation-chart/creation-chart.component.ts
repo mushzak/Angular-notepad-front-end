@@ -1,46 +1,24 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CustomLinerChartService} from '../../services/custom-liner-chart.service';
+import {ChartData} from '../../model/chart-data.model';
+import {HomePageService} from '../../services/home-page.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-creation-chart',
   templateUrl: './creation-chart.component.html',
   styleUrls: ['./creation-chart.component.scss']
 })
-export class CreationChartComponent implements OnInit, AfterViewInit {
+export class CreationChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chart') chart: any;
+  subscription: Subscription = new Subscription();
 
-  single: any[] = [
+  single: ChartData[] = [
     {
       name: 'notes',
-      series: [
-        {
-          name: 5,
-          value: 9
-        },
-        {
-          name: 10,
-          value: 11
-        },
-        {
-          name: 15,
-          value: 17
-        },
-        {
-          name: 18,
-          value: 27
-        },
-        {
-          name: 25,
-          value: 36
-        },
-        {
-          name: 28,
-          value: 41
-        }
-      ]
+      series: []
     }
   ];
-  // view: any[] = [600, 300];
 
   // options
   showXAxis = true;
@@ -51,7 +29,7 @@ export class CreationChartComponent implements OnInit, AfterViewInit {
   xAxisLabel = '';
   showYAxisLabel = true;
   yAxisLabel = 'Number of notes';
-  timeline = true;
+  timeline = false;
 
   colorScheme = {
     domain: ['#84acda']
@@ -61,18 +39,35 @@ export class CreationChartComponent implements OnInit, AfterViewInit {
   autoScale = true;
 
   constructor(
-    private customLinerChartService: CustomLinerChartService
+    private customLinerChartService: CustomLinerChartService,
+    private homePageService: HomePageService
   ) {
-  }
-
-  onSelect(event): void {
-    console.log(event);
   }
 
   ngOnInit(): void {
   }
 
+  initializeListeners(): void {
+    this.subscription.add(
+      this.homePageService.chartDataSub$.subscribe(points => {
+        this.single = [
+          {
+            name: 'notes',
+            series: points
+          }
+        ];
+      })
+    );
+  }
+
   ngAfterViewInit(): void {
+    this.initializeListeners();
     this.customLinerChartService.showDots(this.chart);
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+
 }

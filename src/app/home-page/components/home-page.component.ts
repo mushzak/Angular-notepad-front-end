@@ -4,6 +4,7 @@ import {Note} from '../model/note.model';
 import {Subscription} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {ChartData} from '../model/chart-data.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home-page',
@@ -12,10 +13,10 @@ import {ChartData} from '../model/chart-data.model';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   notes: Note[];
-  chartData: ChartData = {
+  chartData: ChartData[] = [{
     name: 'notes',
     series: []
-  };
+  }];
   subscription: Subscription = new Subscription();
   reqData = {
     offset: 0,
@@ -59,6 +60,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.notes = this.notes.filter(note => note.id !== id);
       })
     );
+    this.getNoteChartData();
   }
 
   searchText($event: string): void {
@@ -82,12 +84,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  getNoteChartData(reqParams = null): void {
+    if (!reqParams) {
+      reqParams = {
+        from: moment().add(-30, 'days').format(),
+        to: moment().format()
+      };
+    }
+    this.homePageService.getNoteChartData(reqParams).subscribe(res => {
+      this.homePageService.chartDataSub$.next(res);
+    });
   }
 
   onScroll(): void {
     this.reqData.offset += 10;
     this.getNotes(true);
   }
+
+  getChartFilterData(dateObj): void {
+    if (dateObj.from && dateObj.to) {
+      this.getNoteChartData(dateObj);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+
 }

@@ -35,12 +35,4 @@ export class CreateNoteComponent implements OnInit {
   get description(): AbstractControl {
     return this.createForm.get('description');
   }
-
-  submitCreateForm(): void {
-    if (this.createForm.invalid) {
-      this.createForm.markAllAsTouched();
-    } else {
-      console.log(this.createForm.value);
-    }
-  }
 }
